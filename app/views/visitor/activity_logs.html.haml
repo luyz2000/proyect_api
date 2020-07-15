@@ -4,16 +4,17 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Proyect API
     %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}
+    %link{:crossorigin => "anonymous", :href => "http://mislav.github.io/will_paginate/pagination.css", :rel => "stylesheet"}
   %body
     .container.mt-5
       %h1 Log de actividades
-      =form_tag "activity_logs",class: "row",method: :get do
+      =form_tag "activity_logs",class: "row",params: {page: params[:page]},method: :get do
         .col.form-group
           =label_tag "baby", "Bebés"
-          =select_tag "baby", options_for_select(@activity_logs.collect{|act| [act.baby.name.titleize, act.baby.id] }.uniq, params[:baby]), prompt: "Seleccionar bebé", class: "form-control"
+          =select_tag "baby", options_for_select(@options_babies, params[:baby]), prompt: "Seleccionar bebé", class: "form-control"
         .col.form-group
           =label_tag "assistant", "Asistentes"
-          =select_tag "assistant", options_for_select(@activity_logs.uniq.collect{|act| [act.assistant.name.titleize, act.assistant.id] }.uniq, params[:assistant]), prompt: "Seleccionar asistente", class: "form-control"
+          =select_tag "assistant", options_for_select(@options_assistant, params[:assistant]), prompt: "Seleccionar asistente", class: "form-control"
         .col.form-group
           =label_tag "status", "Estatus"
           =select_tag "status", options_for_select([["En Progreso", "progreso" ],["Terminada", "terminada"]], params[:status]), prompt: "Todos", class: "form-control"
@@ -40,3 +41,7 @@
               %td=act.start_time.strftime("%Y-%m-%d %H:%M")
               %td=act.stop_time.present? ? "Terminada" : "En Progreso"
               %td=act.stop_time.present? ? (act.duration + " min") : "*"
+      -if @activity_logs.blank?
+        %h2.text-center No hay resultados de busqueda
+      .row.justify-content-center
+        .digg_pagination=will_paginate @activity_logs,previous_label: "Anterior", next_label: "Siguiente"

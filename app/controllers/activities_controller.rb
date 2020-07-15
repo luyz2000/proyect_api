@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
 
   # GET /activities
   def index
-    @activities = Activity.all
+    @activities = Activity.all.paginate(page: params[:page], per_page: 100)
 
     render json: @activities
   end

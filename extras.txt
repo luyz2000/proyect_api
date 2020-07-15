@@ -1,4 +1,1 @@
-rails g scaffold assistant name address phone group
-rails g scaffold baby name birthday:date mother_name father_name address phone
-rails g scaffold activity name description:text
-rails g scaffold activity_log baby:references assistant:references activity:references start_time:datetime stop_time:datetime duration name comments:text
+Paginacion usando gema will_paginate para api y listado de actividades web

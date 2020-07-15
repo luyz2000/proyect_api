@@ -3,7 +3,7 @@ class AssistantsController < ApplicationController
 
   # GET /assistants
   def index
-    @assistants = Assistant.all
+    @assistants = Assistant.all.paginate(page: params[:page], per_page: 100)
 
     render json: @assistants
   end

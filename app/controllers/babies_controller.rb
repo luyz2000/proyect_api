@@ -3,7 +3,7 @@ class BabiesController < ApplicationController
 
   # GET /babies
   def index
-    @babies = Baby.all
+    @babies = Baby.all.paginate(page: params[:page], per_page: 100)
 
     render json: @babies, methods: :age_months
   end

@@ -3,7 +3,7 @@ class ActivityLogsController < ApplicationController
 
   # GET /activity_logs
   def index
-    @activity_logs = ActivityLog.all
+    @activity_logs = ActivityLog.all.paginate(page: params[:page], per_page: 100)
 
     render json: @activity_logs
   end
