@@ -24,8 +24,8 @@ module ProyectApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    #config.time_zone = 'Monterrey'
-    #config.active_record.default_timezone = :local # Or :utc
+    #config.time_zone = 'America/Monterrey'
+    config.active_record.default_timezone = :local # Or :utc
     config.active_support.use_standard_json_time_format = true
     config.active_support.time_precision = 0
 
