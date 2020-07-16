@@ -1,3 +1,5 @@
+Pruebas TDD usando gema rspec y faker para datos test
+
 gem carrierwave para upload de archivos en este caso de imagenes de usuario,bebés,asistentes y actividades en el campo :image
 
 Endpoints para usuarios, control de usuarios usando gem devise y JWT para seguridad de la api en base a token en eventos de
