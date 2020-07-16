@@ -1,1 +1,33 @@
+Endpoint para detalle del log de atividad /activity_logs/:id
+
+Endpoint activity_logs.json con filtros web
+
 Paginacion usando gema will_paginate para api y listado de actividades web
+
+Endpoints de crud disponibles para bebes,asistentes, actividades y logs de actividades
+             GET    /api/activity_logs                                                             activity_logs#index
+             POST   /api/activity_logs                                                             activity_logs#create
+activity_log GET    /api/activity_logs/:id                                                         activity_logs#show
+             PATCH  /api/activity_logs/:id                                                         activity_logs#update
+             PUT    /api/activity_logs/:id                                                         activity_logs#update
+             DELETE /api/activity_logs/:id                                                         activity_logs#destroy
+  activities GET    /api/activities                                                                activities#index
+             POST   /api/activities                                                                activities#create
+    activity GET    /api/activities/:id                                                            activities#show
+             PATCH  /api/activities/:id                                                            activities#update
+             PUT    /api/activities/:id                                                            activities#update
+             DELETE /api/activities/:id                                                            activities#destroy
+      babies GET    /api/babies                                                                    babies#index
+             POST   /api/babies                                                                    babies#create
+        baby GET    /api/babies/:id                                                                babies#show
+             PATCH  /api/babies/:id                                                                babies#update
+             PUT    /api/babies/:id                                                                babies#update
+             DELETE /api/babies/:id                                                                babies#destroy
+  assistants GET    /api/assistants                                                                assistants#index
+             POST   /api/assistants                                                                assistants#create
+   assistant GET    /api/assistants/:id                                                            assistants#show
+             PATCH  /api/assistants/:id                                                            assistants#update
+             PUT    /api/assistants/:id                                                            assistants#update
+             DELETE /api/assistants/:id                                                            assistants#destroy
+             GET    /activity_logs                                                                 visitor#activity_logs
+             GET    /api/babies/:id/activity_logs                                                  babies#activity_logs

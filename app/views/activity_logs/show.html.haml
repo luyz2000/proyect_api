@@ -1,0 +1,63 @@
+!!! 5
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Proyect API
+    %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", :integrity => "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", :rel => "stylesheet"}
+    %link{:crossorigin => "anonymous", :href => "http://mislav.github.io/will_paginate/pagination.css", :rel => "stylesheet"}
+  %body
+    .container
+      .row.mt-5
+        .col-12.mb-3=link_to "< Regresar", "/activity_logs", class: "btn btn-secondary"
+        .col-3
+          .card
+            .card-header.bg-info.text-white.text-center Bebé
+            =image_tag "https://www.pngkit.com/png/detail/293-2930827_happy-baby-vector-baby-crying-icon.png",class: "card-img-top"
+            .card-body
+              %p
+                Nombre:
+                =@activity_log.baby.name
+              %p
+                Mama:
+                =@activity_log.baby.mother_name
+              %p
+                Papa:
+                =@activity_log.baby.father_name
+        .col-3
+          .card
+            .card-header.bg-info.text-white.text-center Asistente
+            =image_tag "https://st3.depositphotos.com/6397910/15347/v/450/depositphotos_153475398-stock-illustration-baby-sitter-mary-poppins-flying.jpg",class: "card-img-top"
+            .card-body
+              %p
+                Nombre:
+                =@activity_log.assistant.name
+              %p
+                Telefono:
+                =link_to @activity_log.assistant.phone, "tel:+#{@activity_log.assistant.phone}"
+              %p
+                Direccion:
+                =@activity_log.assistant.address
+        .col-6
+          .card
+            .card-header.bg-info.text-white.text-center Actividad
+            =image_tag "https://image.shutterstock.com/image-vector/boy-bowl-porridge-260nw-364101251.jpg",class: "card-img-top",style: "max-height: 15rem; object-fit:contain;"
+            .card-body
+              %p
+                Nombre:
+                =@activity_log.activity.name
+              %p
+                Descripcion:
+                =@activity_log.activity.description
+              %p
+                Comentarios:
+                =@activity_log.comments
+              %p.text-center
+                Inicio:
+                =@activity_log.start_time.strftime("%Y-%m-%d %H:%M")
+                -if @activity_log.stop_time.present?
+                  y Finalizo:
+                  =@activity_log.stop_time.strftime("%Y-%m-%d %H:%M")
+                  %br
+                  Tubo una duracion de:
+                  =@activity_log.duration
+                  Minutos
