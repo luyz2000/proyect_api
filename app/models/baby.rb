@@ -1,7 +1,7 @@
 class Baby < ApplicationRecord
   validates :birthday_before_type_cast, format: { with: /\d{4}-[01]\d-[0-3]\d/, message: "Formato de fecha no valido" }, allow_nil: true
   validate :unbirthday, on: [:update, :create]
-
+  mount_uploader :image, SimpleUploader
   has_many :activity_logs
 
   def age_months

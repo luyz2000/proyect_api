@@ -23,6 +23,7 @@ module ProyectApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.middleware.use ActionDispatch::Flash
 
     #config.time_zone = 'America/Monterrey'
     config.active_record.default_timezone = :local # Or :utc

@@ -12,7 +12,7 @@
         .col-3
           .card
             .card-header.bg-info.text-white.text-center Bebé
-            =image_tag "https://www.pngkit.com/png/detail/293-2930827_happy-baby-vector-baby-crying-icon.png",class: "card-img-top"
+            =image_tag @activity_log.baby.image.present? ? @activity_log.baby.image.url : "https://www.pngkit.com/png/detail/293-2930827_happy-baby-vector-baby-crying-icon.png",class: "card-img-top"
             .card-body
               %p
                 Nombre:
@@ -26,7 +26,7 @@
         .col-3
           .card
             .card-header.bg-info.text-white.text-center Asistente
-            =image_tag "https://st3.depositphotos.com/6397910/15347/v/450/depositphotos_153475398-stock-illustration-baby-sitter-mary-poppins-flying.jpg",class: "card-img-top"
+            =image_tag @activity_log.assistant.image.present? ? @activity_log.assistant.image.url : "https://st3.depositphotos.com/6397910/15347/v/450/depositphotos_153475398-stock-illustration-baby-sitter-mary-poppins-flying.jpg",class: "card-img-top"
             .card-body
               %p
                 Nombre:
@@ -40,7 +40,7 @@
         .col-6
           .card
             .card-header.bg-info.text-white.text-center Actividad
-            =image_tag "https://image.shutterstock.com/image-vector/boy-bowl-porridge-260nw-364101251.jpg",class: "card-img-top",style: "max-height: 15rem; object-fit:contain;"
+            =image_tag @activity_log.activity.image.present? ? @activity_log.activity.image.url : "https://image.shutterstock.com/image-vector/boy-bowl-porridge-260nw-364101251.jpg",class: "card-img-top",style: "max-height: 15rem; object-fit:contain;"
             .card-body
               %p
                 Nombre:

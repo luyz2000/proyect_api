@@ -1,10 +1,11 @@
 class ActivityLogsController < ApplicationController
   before_action :set_activity_log, only: [:show, :update, :destroy]
+  before_action :authenticate_user!,only: [:create, :update, :destroy]
   include ActionController::MimeResponds
   include ActionView::Layouts
   include ActionController::Rendering
 
-  # GET /activity_logs
+  # GET /api/activity_logs and /activity_logs for html
   def index
     if api_request?
       @activity_logs = ActivityLog.all.paginate(page: params[:page], per_page: 100)
@@ -26,7 +27,7 @@ class ActivityLogsController < ApplicationController
 
   end
 
-  # GET /activity_logs/1
+  # GET /api/activity_logs/1
   def show
     respond_to do |format|
       format.html { render :show }
@@ -34,7 +35,7 @@ class ActivityLogsController < ApplicationController
     end
   end
 
-  # POST /activity_logs
+  # POST /api/activity_logs
   def create
     @activity_log = ActivityLog.new(activity_log_params)
 
@@ -45,7 +46,7 @@ class ActivityLogsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /activity_logs/1
+  # PATCH/PUT /api/activity_logs/1
   def update
     if @activity_log.update(activity_log_params)
       render json: @activity_log
@@ -54,7 +55,7 @@ class ActivityLogsController < ApplicationController
     end
   end
 
-  # DELETE /activity_logs/1
+  # DELETE /api/activity_logs/1
   def destroy
     @activity_log.destroy
   end
@@ -75,6 +76,6 @@ class ActivityLogsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def activity_log_params
-      params.require(:activity_log).permit(:baby_id, :assistant_id, :activity_id, :start_time, :stop_time, :duration, :name, :comments)
+      params.require(:activity_log).permit(:baby_id, :assistant_id, :activity_id, :start_time, :stop_time, :duration, :name, :comments, :image)
     end
 end

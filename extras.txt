@@ -1,8 +1,33 @@
-Endpoint para detalle del log de atividad /activity_logs/:id
+gem carrierwave para upload de archivos en este caso de imagenes de usuario,bebés,asistentes y actividades en el campo :image
+
+Endpoints para usuarios, control de usuarios usando gem devise y JWT para seguridad de la api en base a token en eventos de
+creacion,actualizacion y eliminacion sera requerido un token de seguridad de un usuario, no se requiere token para ver listados o shows.
+
+         new_user_session GET    /api/users/login(.:format)                                                               sessions#new {:format=>"json"}
+             user_session POST   /api/users/login(.:format)                                                               sessions#create {:format=>"json"}
+     destroy_user_session DELETE /api/users/sign_out(.:format)                                                            sessions#destroy {:format=>"json"}
+        new_user_password GET    /api/users/password/new(.:format)                                                        devise/passwords#new {:format=>"json"}
+       edit_user_password GET    /api/users/password/edit(.:format)                                                       devise/passwords#edit {:format=>"json"}
+            user_password PATCH  /api/users/password(.:format)                                                            devise/passwords#update {:format=>"json"}
+                          PUT    /api/users/password(.:format)                                                            devise/passwords#update {:format=>"json"}
+                          POST   /api/users/password(.:format)                                                            devise/passwords#create {:format=>"json"}
+cancel_user_registration  GET    /api/users/cancel(.:format)                                                              devise/registrations#cancel {:format=>"json"}
+  new_user_registration   GET    /api/users/sign_up(.:format)                                                             devise/registrations#new {:format=>"json"}
+  edit_user_registration  GET    /api/users/edit(.:format)                                                                devise/registrations#edit {:format=>"json"}
+      user_registration   PATCH  /api/users(.:format)                                                                     devise/registrations#update {:format=>"json"}
+                          PUT    /api/users(.:format)                                                                     devise/registrations#update {:format=>"json"}
+                          DELETE /api/users(.:format)                                                                     devise/registrations#destroy {:format=>"json"}
+                          POST   /api/users(.:format)                                                                     devise/registrations#create {:format=>"json"}
+                   user   GET    /api/user(.:format)                                                                      users#show {:format=>"json"}
+                          PATCH  /api/user(.:format)                                                                      users#update {:format=>"json"}
+                          PUT    /api/user(.:format)                                                                      users#update {:format=>"json"}
+
+
+Endpoint para detalle del log de actividad /activity_logs/:id
 
 Endpoint activity_logs.json con filtros web
 
-Paginacion usando gema will_paginate para api y listado de actividades web
+Paginacion usando gem will_paginate para api y listado de actividades web
 
 Endpoints de crud disponibles para bebes,asistentes, actividades y logs de actividades
              GET    /api/activity_logs                                                             activity_logs#index

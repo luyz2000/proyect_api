@@ -1,19 +1,20 @@
 class AssistantsController < ApplicationController
   before_action :set_assistant, only: [:show, :update, :destroy]
+  before_action :authenticate_user!,only: [:create, :update, :destroy]
 
-  # GET /assistants
+  # GET /api/assistants
   def index
     @assistants = Assistant.all.paginate(page: params[:page], per_page: 100)
 
     render json: @assistants
   end
 
-  # GET /assistants/1
+  # GET /api/assistants/1
   def show
     render json: @assistant
   end
 
-  # POST /assistants
+  # POST /api/assistants
   def create
     @assistant = Assistant.new(assistant_params)
 
@@ -24,7 +25,7 @@ class AssistantsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assistants/1
+  # PATCH/PUT /api/assistants/1
   def update
     if @assistant.update(assistant_params)
       render json: @assistant
@@ -33,7 +34,7 @@ class AssistantsController < ApplicationController
     end
   end
 
-  # DELETE /assistants/1
+  # DELETE /api/assistants/1
   def destroy
     @assistant.destroy
   end
@@ -46,6 +47,6 @@ class AssistantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def assistant_params
-      params.require(:assistant).permit(:name, :address, :phone, :group)
+      params.require(:assistant).permit(:name, :address, :phone, :group, :image)
     end
 end

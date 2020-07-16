@@ -1,19 +1,20 @@
 class BabiesController < ApplicationController
   before_action :set_baby, only: [:show, :update, :destroy, :activity_logs]
+  before_action :authenticate_user!,only: [:create, :update, :destroy]
 
-  # GET /babies
+  # GET /api/babies
   def index
     @babies = Baby.all.paginate(page: params[:page], per_page: 100)
 
     render json: @babies, methods: :age_months
   end
 
-  # GET /babies/1
+  # GET /api/babies/1
   def show
     render json: @baby
   end
 
-  # POST /babies
+  # POST /api/babies
   def create
     @baby = Baby.new(baby_params)
 
@@ -24,7 +25,7 @@ class BabiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /babies/1
+  # PATCH/PUT /api/babies/1
   def update
     if @baby.update(baby_params)
       render json: @baby
@@ -33,7 +34,7 @@ class BabiesController < ApplicationController
     end
   end
 
-  # DELETE /babies/1
+  # DELETE /api/babies/1
   def destroy
     @baby.destroy
   end
@@ -50,6 +51,6 @@ class BabiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def baby_params
-      params.require(:baby).permit(:name, :birthday, :mother_name, :father_name, :address, :phone)
+      params.require(:baby).permit(:name, :birthday, :mother_name, :father_name, :address, :phone, :image)
     end
 end
