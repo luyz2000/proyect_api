@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Activity Logs", type: :request do
 
-  describe "GET /api/activity_logs" do 
+  describe "GET /api/activity_logs" do
     before {get '/api/activity_logs'}
 
     it "should return OK" do
@@ -22,13 +22,15 @@ RSpec.describe "Activity Logs", type: :request do
       expect(response).to have_http_status(200)
     end
   end
-  
+
 
   describe "POST /api/activity_logs" do
     let!(:baby){create(:baby)}
     let!(:assistant){create(:assistant)}
     let!(:activity){create(:activity)}
-    it "should create an activity_log" do 
+    let!(:user){create(:user)}
+    let!(:user_auth_headers){{'Authorization' => "Bearer #{user.generate_jwt}"}}
+    it "should create an activity_log" do
       req_paylod = {
         activity_log: {
           baby_id: baby.id,
@@ -41,7 +43,7 @@ RSpec.describe "Activity Logs", type: :request do
           comments: "Comments"
         }
       }
-      post "/api/activity_logs", params: req_paylod
+      post "/api/activity_logs", params: req_paylod, headers: user_auth_headers
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
       expect(payload["id"]).to_not be_nil
@@ -60,7 +62,7 @@ RSpec.describe "Activity Logs", type: :request do
           comments: "Comments"
         }
       }
-      post "/api/activity_logs", params: req_paylod
+      post "/api/activity_logs", params: req_paylod, headers: user_auth_headers
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
       expect(response).to have_http_status(:unprocessable_entity)
@@ -69,14 +71,16 @@ RSpec.describe "Activity Logs", type: :request do
 
   describe "PUT /api/activity_logs/{id}" do
     let!(:activity_log){ create(:activity_log) }
+    let!(:user){create(:user)}
+    let!(:user_auth_headers){{'Authorization' => "Bearer #{user.generate_jwt}"}}
 
-    it "should update an activity_log" do 
+    it "should update an activity_log" do
       req_paylod = {
         activity_log: {
           name: "Raúl Perez"
         }
       }
-      put "/api/activity_logs/#{activity_log.id}", params: req_paylod
+      put "/api/activity_logs/#{activity_log.id}", params: req_paylod, headers: user_auth_headers
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
       expect(payload["id"]).to eq(activity_log.id)
